@@ -45,6 +45,8 @@ namespace Domain
         [Display(Name = "Time", ResourceType = typeof(Resources.Domain))]
         public DateTime Time { get; set; }
 
+        public int UserId { get; set; }
+
         public virtual List<Contact> Contacts { get; set; }
         public virtual List<PersonInPlan> PersonInPlans { get; set; }
         public virtual List<Plan> CreatorInPlans { get; set; }

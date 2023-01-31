@@ -47,7 +47,10 @@ namespace Web.Areas.HelpPage.Models
         /// </summary>
         public IList<ParameterDescription> RequestBodyParameters
         {
-            get { return GetParameterDescriptions(RequestModelDescription); }
+            get
+            {
+                return GetParameterDescriptions(RequestModelDescription);
+            }
         }
 
         /// <summary>
@@ -60,7 +63,10 @@ namespace Web.Areas.HelpPage.Models
         /// </summary>
         public IList<ParameterDescription> ResourceProperties
         {
-            get { return GetParameterDescriptions(ResourceDescription); }
+            get
+            {
+                return GetParameterDescriptions(ResourceDescription);
+            }
         }
 
         /// <summary>
@@ -89,8 +95,7 @@ namespace Web.Areas.HelpPage.Models
             CollectionModelDescription collectionModelDescription = modelDescription as CollectionModelDescription;
             if (collectionModelDescription != null)
             {
-                complexTypeModelDescription =
-                    collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
+                complexTypeModelDescription = collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
                 if (complexTypeModelDescription != null)
                 {
                     return complexTypeModelDescription.Properties;

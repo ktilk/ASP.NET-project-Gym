@@ -67,7 +67,7 @@ namespace Web.Areas.Admin.Controllers
                 
                 vm.ContactType.ContactTypeName = new MultiLangString(vm.ContactTypeName,
                     CultureHelper.GetCurrentNeutralUICulture(), vm.ContactTypeName,
-                    nameof(vm.ContactType) + "." + vm.ContactType.ContactTypeId + "." + nameof(vm.ContactType.ContactTypeName));
+                    nameof(vm.ContactType) + "." + vm.ContactType.ContactTypeID + "." + nameof(vm.ContactType.ContactTypeName));
 
                 _uow.ContactTypes.Add(vm.ContactType);
                 _uow.Commit();
@@ -107,9 +107,9 @@ namespace Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                vm.ContactType.ContactTypeName = _uow.MultiLangStrings.GetById(vm.ContactType.ContactTypeNameId);
+                vm.ContactType.ContactTypeName = _uow.MultiLangStrings.GetById(vm.ContactType.ContactTypeNameID);
                 vm.ContactType.ContactTypeName.SetTranslation(vm.ContactTypeName, CultureHelper.GetCurrentNeutralUICulture(),
-                    nameof(vm.ContactType) + "." + vm.ContactType.ContactTypeId + "." + nameof(vm.ContactType.ContactTypeName));
+                    nameof(vm.ContactType) + "." + vm.ContactType.ContactTypeID + "." + nameof(vm.ContactType.ContactTypeName));
 
                 _uow.ContactTypes.Update(vm.ContactType);
                 _uow.Commit();

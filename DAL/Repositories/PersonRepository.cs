@@ -17,12 +17,12 @@ namespace DAL.Repositories
 
         public List<Person> GetAllForUser(int userId)
         {
-            return DbSet.Where(p => p.UserId == userId).OrderBy(o => o.Lastname).ThenBy(o => o.Firstname).Include(c =>c.Contacts).ToList();
+            return DbSet.Where(p => p.UserId == userId).OrderBy(o => o.LastName).ThenBy(o => o.FirstName).Include(c =>c.Contacts).ToList();
         }
 
         public Person GetForUser(int personId, int userId)
         {
-            return DbSet.FirstOrDefault(a => a.PersonId == personId && a.UserId == userId);
+            return DbSet.FirstOrDefault(a => a.PersonID == personId && a.UserId == userId);
         }
 
     }

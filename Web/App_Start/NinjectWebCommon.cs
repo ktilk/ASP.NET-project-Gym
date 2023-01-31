@@ -1,33 +1,35 @@
-using System;
-using System.Web;
-using DAL;
-using DAL.Helpers;
-using DAL.Interfaces;
-using Domain.Identity;
-using Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Ninject;
-using Ninject.Web.Common;
-using Web;
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Web.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Web.App_Start.NinjectWebCommon), "Stop")]
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof (NinjectWebCommon), "Stop")]
-
-namespace Web
+namespace Web.App_Start
 {
-    public static class NinjectWebCommon
+    using System;
+    using System.Web;
+
+    using DAL;
+    using DAL.Helpers;
+    using DAL.Interfaces;
+    using Domain.Identity;
+    using Identity;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.Owin.Security;
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
+    using Ninject;
+    using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
+
+    public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        /// Starts the application.
         /// </summary>
-        public static void Start()
+        public static void Start() 
         {
-            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 
@@ -50,7 +52,6 @@ namespace Web
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
                 RegisterServices(kernel);
                 return kernel;
             }
